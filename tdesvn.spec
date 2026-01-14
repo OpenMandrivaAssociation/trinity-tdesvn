@@ -41,7 +41,7 @@ BuildOption:    -DCMAKE_BUILD_TYPE="RelWithDebInfo"
 BuildOption:    -DCMAKE_INSTALL_PREFIX=%{tde_prefix}
 BuildOption:    -DINCLUDE_INSTALL_DIR=%{tde_prefix}/include
 BuildOption:    -DMAN_INSTALL_DIR=%{tde_prefix}/share/man
-BuildOption:    -DPKGCONFIG_INSTALL_DIR=%{tde_prefix}/%{_lib}/trinity/pkgconfig
+BuildOption:    -DPKGCONFIG_INSTALL_DIR=%{tde_prefix}/%{_lib}/pkgconfig
 BuildOption:    -DSHARE_INSTALL_PREFIX=%{tde_prefix}/share
 BuildOption:    -DBUILD_DOC=ON -DBUILD_TRANSLATIONS=ON
 
