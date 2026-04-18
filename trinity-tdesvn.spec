@@ -59,7 +59,7 @@ BuildRequires:	subversion-devel
 
 # SQLITE3 support
 BuildRequires:  pkgconfig(sqlite3)
-BuildRequires:  libtqt3-mt-sqlite3
+BuildRequires:  pkgconfig(tqt-mt)
 
 # ACL support
 BuildRequires:  pkgconfig(libacl)
