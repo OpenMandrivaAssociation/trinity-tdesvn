@@ -2,10 +2,6 @@
 %bcond gamin 1
 
 # TDE variables
-%if "%{?tde_version}" == ""
-%define tde_version 14.1.5
-%endif
-
 %define tde_pkg tdesvn
 %define tde_prefix /opt/trinity
 
@@ -15,14 +11,14 @@
 %define _disable_rebuild_configure 1
 
 # fixes error: Empty %files file …/debugsourcefiles.list
-%define _debugsource_template %{nil}
+%undefine _debugsource_template
 
 %define tarball_name %{tde_pkg}-trinity
 
 
 Name:		trinity-%{tde_pkg}
-Version:	1.0.4
-Release:	%{?tde_version:%{tde_version}_}3
+Version:	14.1.6
+Release:	1
 Summary:	Subversion client with tight TDE integration
 Group:		Applications/Utilities
 URL:		http://www.elliptique.net/~ken/kima/
@@ -30,7 +26,7 @@ URL:		http://www.elliptique.net/~ken/kima/
 License:	GPLv2+
 
 
-Source0:		https://mirror.ppa.trinitydesktop.org/trinity/releases/R%{tde_version}/main/applications/development/%{tarball_name}-%{tde_version}.tar.xz
+Source0:		https://mirror.ppa.trinitydesktop.org/trinity/releases/R%{version}/main/applications/development/%{tarball_name}-%{version}.tar.xz
 
 BuildSystem:    cmake
 
@@ -42,11 +38,12 @@ BuildOption:    -DPKGCONFIG_INSTALL_DIR=%{tde_prefix}/%{_lib}/pkgconfig
 BuildOption:    -DSHARE_INSTALL_PREFIX=%{tde_prefix}/share
 BuildOption:    -DBUILD_DOC=ON -DBUILD_TRANSLATIONS=ON
 
-BuildRequires:	trinity-tdelibs-devel >= %{tde_version}
-BuildRequires:	trinity-tdebase-devel >= %{tde_version}
+BuildRequires:	trinity-tdelibs-devel >= %{version}
+BuildRequires:	trinity-tdebase-devel >= %{version}
+BuildRequires:	trinity-tde-cmake >= %{version}
+
 BuildRequires:	desktop-file-utils
 
-BuildRequires:	trinity-tde-cmake >= %{tde_version}
 BuildRequires: libtool
 
 %{!?with_clang:BuildRequires:	gcc-c++}
@@ -81,11 +78,11 @@ BuildRequires:  pkgconfig(sm)
 BuildRequires:  pkgconfig(ldap)
 
 
-Requires:		%{name}-tdeio-plugins = %{?epoch:%{epoch}:}%{version}-%{release}
-Requires:		trinity-libsvnqt = %{?epoch:%{epoch}:}%{version}-%{release}
+Requires:		%{name}-tdeio-plugins = %{EVRD}
+Requires:		trinity-libsvnqt = %{EVRD}
 
-Obsoletes:	trinity-kdesvn < %{?epoch:%{epoch}:}%{version}-%{release}
-Provides:	trinity-kdesvn = %{?epoch:%{epoch}:}%{version}-%{release}
+Obsoletes:	trinity-kdesvn < %{EVRD}
+Provides:	trinity-kdesvn = %{EVRD}
 
 
 %description
@@ -149,7 +146,7 @@ written in C++.
 
 %package -n trinity-libsvnqt-devel
 Group:			Development/Libraries
-Requires:		trinity-libsvnqt = %{?epoch:%{epoch}:}%{version}-%{release}
+Requires:		trinity-libsvnqt = %{EVRD}
 Requires:		lib64tqt4-devel
 Requires:		subversion-devel
 Summary:		Qt wrapper library for subversion (development files) [Trinity]
@@ -170,10 +167,10 @@ Group:			Development/Libraries
 Conflicts:	trinity-kdesdk-tdeio-plugins
 Summary:		subversion I/O slaves for Trinity
 
-Obsoletes:	trinity-kdesvn-kio-plugins < %{?epoch:%{epoch}:}%{version}-%{release}
-Provides:	trinity-kdesvn-kio-plugins = %{?epoch:%{epoch}:}%{version}-%{release}
-Obsoletes:	trinity-tdesvn-kio-plugins < %{?epoch:%{epoch}:}%{version}-%{release}
-Provides:	trinity-tdesvn-kio-plugins = %{?epoch:%{epoch}:}%{version}-%{release}
+Obsoletes:	trinity-kdesvn-kio-plugins < %{EVRD}
+Provides:	trinity-kdesvn-kio-plugins = %{EVRD}
+Obsoletes:	trinity-tdesvn-kio-plugins < %{EVRD}
+Provides:	trinity-tdesvn-kio-plugins = %{EVRD}
 
 %description tdeio-plugins
 This packages includes TDEIO slaves for svn, svn+file, svn+http, 
